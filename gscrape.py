@@ -145,8 +145,10 @@ def main():
                     listing.click()
                     page.wait_for_timeout(5000)
 
-                    name_xpath = f'(//div[contains(@class, "qBF1Pd fontHeadlineSmall ")])[{index + 1}]'
-                    address_xpath = '//button[@data-item-id="address"]//div[contains(@class, "fontBodyMedium")]'
+                    name_xpath = (f'(//div[contains'
+                                  f'(@class, "qBF1Pd fontHeadlineSmall ")])[{index + 1}]')
+                    address_xpath = ('//button[@data-item-id="address"]//div[contains'
+                                     '(@class, "fontBodyMedium")]')
                     website_xpath = ('//a[@data-item-id="authority"]//div[contains(@class, '
                                      '"fontBodyMedium")]')
                     phone_number_xpath = ('//button[contains(@data-item-id, "phone:tel:")]//'
