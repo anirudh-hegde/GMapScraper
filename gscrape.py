@@ -24,6 +24,7 @@ class Business:
 
 @dataclass
 class BusinessList:
+    """used to process output"""
     business_list: list[Business] = field(default_factory=list)
     save_at = 'output'
 
