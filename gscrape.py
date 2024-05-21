@@ -114,29 +114,52 @@ def main():
                     listings = [listing.locator("xpath=..") for listing in listings]
                     print(f"Total Scraped: {len(listings)}")
                     break
-                else:
 
-                    if (
-                            page.locator(
-                                '//a[contains(@href, "https://www.google.com/maps/place")]'
-                            ).count()
-                            == previously_counted
-                    ):
-                        listings = page.locator(
-                            '//a[contains(@href, "https://www.google.com/maps/place")]'
-                        ).all()
-                        print(f"Arrived at all available\nTotal Scraped: {len(listings)}")
-                        break
-                    else:
-                        previously_counted = page.locator(
+                if (
+                        page.locator(
                             '//a[contains(@href, "https://www.google.com/maps/place")]'
                         ).count()
-                        print(
-                            f"Currently Scraped: ",
-                            page.locator(
-                                '//a[contains(@href, "https://www.google.com/maps/place")]'
-                            ).count(),
-                        )
+                        == previously_counted
+                ):
+                    listings = page.locator(
+                        '//a[contains(@href, "https://www.google.com/maps/place")]'
+                    ).all()
+                    print(f"Arrived at all available\nTotal Scraped: {len(listings)}")
+                    break
+                else:
+                    previously_counted = page.locator(
+                        '//a[contains(@href, "https://www.google.com/maps/place")]'
+                    ).count()
+                    print(
+                        f"Currently Scraped: ",
+                        page.locator(
+                            '//a[contains(@href, "https://www.google.com/maps/place")]'
+                        ).count(),
+                    )
+
+                # else:
+                #
+                #     if (
+                #             page.locator(
+                #                 '//a[contains(@href, "https://www.google.com/maps/place")]'
+                #             ).count()
+                #             == previously_counted
+                #     ):
+                #         listings = page.locator(
+                #             '//a[contains(@href, "https://www.google.com/maps/place")]'
+                #         ).all()
+                #         print(f"Arrived at all available\nTotal Scraped: {len(listings)}")
+                #         break
+                #     else:
+                #         previously_counted = page.locator(
+                #             '//a[contains(@href, "https://www.google.com/maps/place")]'
+                #         ).count()
+                #         print(
+                #             f"Currently Scraped: ",
+                #             page.locator(
+                #                 '//a[contains(@href, "https://www.google.com/maps/place")]'
+                #             ).count(),
+                #         )
 
             business_list = BusinessList()
 
