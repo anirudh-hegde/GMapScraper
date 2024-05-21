@@ -150,13 +150,10 @@ def main():
                                   f'(@class, "qBF1Pd fontHeadlineSmall ")])[{index + 1}]')
                     address_xpath = ('//button[@data-item-id="address"]//div[contains'
                                      '(@class, "fontBodyMedium")]')
-                    website_xpath = ('//a[@data-item-id="authority"]//div[contains(@class, '
+                    website_xpath = ('//a[@data-item-id="authority"]//div[contains(@class,'
                                      '"fontBodyMedium")]')
                     phone_number_xpath = ('//button[contains(@data-item-id, "phone:tel:")]//'
                                           'div[contains(@class, "fontBodyMedium")]')
-                    # category_xpath = ('//*[@id="QA0Szd"]/div/div/div[1]/div[3]/'
-                    #                   'div/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/span/span/button')
-                    # reviews_span_xpath = '//span[@aria-hidden="true"]/text()'
 
                     business = Business()
 
