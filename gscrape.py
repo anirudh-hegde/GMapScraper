@@ -3,16 +3,10 @@
 
 # playwright install
 from dataclasses import dataclass, asdict, field
-# import gspread
-import playwright
 from playwright.sync_api import sync_playwright
 import pandas as pd
 import argparse
 import os
-
-
-# import sys
-# from oauth2client.service_account import ServiceAccountCredentials
 
 
 @dataclass
@@ -181,22 +175,22 @@ def main():
                     else:
                         business.phone_number = ""
 
-                    if listing.locator(reviews_span_xpath).count() > 0:
-                        business.reviews_average = float(
-                            listing.locator(reviews_span_xpath)
-                            .locator('span[aria-hidden="true"]')
-                            .inner_text()
-                        )
-                        business.reviews_count = int(
-                            listing.locator(reviews_span_xpath)
-                            .locator('span[aria-label*="reviews"]')
-                            .inner_text()
-                            .split()[0]
-                            .replace(',', '')
-                        )
-                    else:
-                        business.reviews_average = ""
-                        business.reviews_count = ""
+                    # if listing.locator(reviews_span_xpath).count() > 0:
+                    #     business.reviews_average = float(
+                    #         listing.locator(reviews_span_xpath)
+                    #         .locator('span[aria-hidden="true"]')
+                    #         .inner_text()
+                    #     )
+                    #     business.reviews_count = int(
+                    #         listing.locator(reviews_span_xpath)
+                    #         .locator('span[aria-label*="reviews"]')
+                    #         .inner_text()
+                    #         .split()[0]
+                    #         .replace(',', '')
+                    #     )
+                    # else:
+                    #     business.reviews_average = ""
+                    #     business.reviews_count = ""
 
                     business.latitude, business.longitude = extract_coordinates_from_url(page.url)
 
