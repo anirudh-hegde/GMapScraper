@@ -1,12 +1,12 @@
-# This script serves as an example of how to use Python
-# & Playwright to scrape/extract data from Google Maps
+"""This script serves as an example of how to use Python
+& Playwright to scrape/extract data from Google Maps
 
-# playwright install
+playwright install"""
+import argparse
+import os
 from dataclasses import dataclass, asdict, field
 from playwright.sync_api import sync_playwright
 import pandas as pd
-import argparse
-import os
 
 
 @dataclass
@@ -112,7 +112,7 @@ def main():
                     listings = [listing.locator("xpath=..") for listing in listings]
                     print(f"Total Scraped: {len(listings)}")
                     break
-                    # else:
+                else:
 
                     if (
                             page.locator(
@@ -151,9 +151,9 @@ def main():
                                      '"fontBodyMedium")]')
                     phone_number_xpath = ('//button[contains(@data-item-id, "phone:tel:")]//'
                                           'div[contains(@class, "fontBodyMedium")]')
-                    category_xpath = ('//*[@id="QA0Szd"]/div/div/div[1]/div[3]/'
-                                      'div/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/span/span/button')
-                    reviews_span_xpath = '//span[@aria-hidden="true"]/text()'
+                    # category_xpath = ('//*[@id="QA0Szd"]/div/div/div[1]/div[3]/'
+                    #                   'div/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/span/span/button')
+                    # reviews_span_xpath = '//span[@aria-hidden="true"]/text()'
 
                     business = Business()
 
@@ -171,7 +171,8 @@ def main():
                     else:
                         business.website = ""
                     if page.locator(phone_number_xpath).count() > 0:
-                        business.phone_number = page.locator(phone_number_xpath).all()[0].inner_text()
+                        business.phone_number = page.locator(
+                            phone_number_xpath).all()[0].inner_text()
                     else:
                         business.phone_number = ""
 
