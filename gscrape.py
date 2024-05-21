@@ -25,7 +25,8 @@ class Business:
 @dataclass
 class BusinessList:
     """used to process output"""
-    business_list: list[Business] = field(default_factory=list)
+    # business_list: list[Business] = field(default_factory=list)
+    business_list: Business = field(default_factory=list)
     save_at = 'output'
 
     def dataframe(self):
@@ -47,7 +48,7 @@ class BusinessList:
         self.dataframe().to_csv(f"output/{filename}.csv", index=False)
 
 
-def extract_coordinates_from_url(url: str) -> tuple[float, float]:
+def extract_coordinates_from_url(url: str) -> [float, float]:
     """Helper function to extract coordinates from URL"""
 
     coordinates = url.split('/@')[-1].split('/')[0]
