@@ -17,7 +17,7 @@ category from different categories like Restaurant, Pharmacy, Gym.
 ### Build Instructions
 * Clone the repository
 ```sh
-git clone https://github.com/anirudh-hegde/GMapScraper.git
+git clone https://github.com/anirudh-hegde/GMapScraper-Automation.git
 ```
 
 * Move inside the repository
