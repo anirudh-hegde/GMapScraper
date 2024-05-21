@@ -2,14 +2,16 @@
 # & Playwright to scrape/extract data from Google Maps
 
 # playwright install
-from playwright.sync_api import sync_playwright
 from dataclasses import dataclass, asdict, field
+# import gspread
+from playwright.sync_api import sync_playwright
 import pandas as pd
 import argparse
 import os
-import sys
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+
+
+# import sys
+# from oauth2client.service_account import ServiceAccountCredentials
 
 
 @dataclass
@@ -23,8 +25,6 @@ class Business:
     latitude: float = None
     longitude: float = None
     category: str = None
-    reviews_count: int = None
-    reviews_average: float = None
 
 
 @dataclass
@@ -33,19 +33,19 @@ class BusinessList:
     save_at = 'output'
 
     def dataframe(self):
-
+        """returns business data"""
         return pd.json_normalize(
             (asdict(business) for business in self.business_list), sep="_"
         )
 
     def save_to_excel(self, filename):
-
+        """saves in .xlsx format"""
         if not os.path.exists(self.save_at):
             os.makedirs(self.save_at)
         self.dataframe().to_excel(f"output/{filename}.xlsx", index=False)
 
     def save_to_csv(self, filename):
-
+        """saves in .csv format"""
         if not os.path.exists(self.save_at):
             os.makedirs(self.save_at)
         self.dataframe().to_csv(f"output/{filename}.csv", index=False)
@@ -59,7 +59,7 @@ def extract_coordinates_from_url(url: str) -> tuple[float, float]:
 
 
 def main():
-    # Read search from arguments
+    """process of automation starts"""
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--search", type=str)
     parser.add_argument("-t", "--total", type=int)
@@ -117,7 +117,7 @@ def main():
                     listings = [listing.locator("xpath=..") for listing in listings]
                     print(f"Total Scraped: {len(listings)}")
                     break
-                else:
+                    # else:
 
                     if (
                             page.locator(
@@ -152,9 +152,12 @@ def main():
 
                     name_xpath = f'(//div[contains(@class, "qBF1Pd fontHeadlineSmall ")])[{index + 1}]'
                     address_xpath = '//button[@data-item-id="address"]//div[contains(@class, "fontBodyMedium")]'
-                    website_xpath = '//a[@data-item-id="authority"]//div[contains(@class, "fontBodyMedium")]'
-                    phone_number_xpath = '//button[contains(@data-item-id, "phone:tel:")]//div[contains(@class, "fontBodyMedium")]'
-                    category_xpath = '//*[@id="QA0Szd"]/div/div/div[1]/div[3]/div/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/span/span/button'
+                    website_xpath = ('//a[@data-item-id="authority"]//div[contains(@class, '
+                                     '"fontBodyMedium")]')
+                    phone_number_xpath = ('//button[contains(@data-item-id, "phone:tel:")]//'
+                                          'div[contains(@class, "fontBodyMedium")]')
+                    category_xpath = ('//*[@id="QA0Szd"]/div/div/div[1]/div[3]/'
+                                      'div/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/span/span/button')
                     reviews_span_xpath = '//span[@aria-hidden="true"]/text()'
 
                     business = Business()
